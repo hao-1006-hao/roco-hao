@@ -302,6 +302,8 @@ select option { background: #251457; color: var(--text); }
 .status-badge.b-obtained { background: rgba(70, 214, 132, .16); color: var(--green); border: 1px solid rgba(70, 214, 132, .4); }
 .status-badge.b-missing { background: rgba(255, 255, 255, .08); color: var(--text-dim); border: 1px solid rgba(255, 255, 255, .15); }
 .b-period { background: rgba(139, 124, 246, .16); color: #b9affc; border: 1px solid rgba(139, 124, 246, .4); }
+.b-type { background: rgba(139, 124, 246, .14); color: #b9affc; border: 1px solid rgba(139, 124, 246, .4); }
+.b-stage { background: rgba(255, 255, 255, .08); color: var(--text-dim); border: 1px solid rgba(255, 255, 255, .15); }
 
 .card-name { font-size: 17px; font-weight: 700; margin-top: 10px; }
 .card-meta { font-size: 12.5px; color: var(--text-dim); margin-top: 2px; }
