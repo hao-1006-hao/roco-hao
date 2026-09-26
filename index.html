@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#1c1142" />
-  <meta name="description" content="洛克王国：世界「命定勇者」奖牌收集统计系统 —— 追踪命定花种奖牌进度、记录每期使用的挑战精灵、统计已使用/未使用精灵。" />
+  <meta name="description" content="洛克王国：世界「命定勇者」奖牌收集统计系统 —— 全精灵图鉴奖牌追踪：用任意精灵通关命定花种精灵，奖牌归所使用的精灵。" />
   <title>命定勇者奖牌收集统计 · 洛克王国世界</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="manifest" href="manifest.webmanifest" />
@@ -28,25 +28,25 @@
       </div>
       <div class="header-title">
         <h1>命定勇者奖牌收集统计</h1>
-        <p>洛克王国：世界 · 命定花种活动图鉴进度追踪</p>
+        <p>洛克王国：世界 · 全精灵图鉴奖牌追踪</p>
       </div>
     </header>
 
     <!-- 选项卡 -->
     <nav class="tabs" aria-label="功能模块">
-      <button class="tab-btn active" data-tab="medal">奖牌收集</button>
-      <button class="tab-btn" data-tab="usage">使用记录与统计</button>
+      <button class="tab-btn active" data-tab="medal">精灵图鉴</button>
+      <button class="tab-btn" data-tab="usage">奖牌与挑战记录</button>
       <button class="tab-btn" data-tab="tools">小工具</button>
     </nav>
 
-    <!-- ============ 面板 1：奖牌收集 ============ -->
+    <!-- ============ 面板 1：精灵图鉴 ============ -->
     <section class="tab-panel active" id="panel-medal">
 
       <div class="stats-grid">
-        <div class="stat-card gold"><div class="stat-label">收录精灵</div><div class="stat-value" id="statTotal">0</div></div>
-        <div class="stat-card green"><div class="stat-label">已获奖牌</div><div class="stat-value" id="statObtained">0</div></div>
-        <div class="stat-card red"><div class="stat-label">待挑战</div><div class="stat-value" id="statMissing">0</div></div>
-        <div class="stat-card purple"><div class="stat-label">完成进度</div><div class="stat-value" id="statPct">0%</div></div>
+        <div class="stat-card gold"><div class="stat-label">全图鉴精灵</div><div class="stat-value" id="statTotal">0</div></div>
+        <div class="stat-card green"><div class="stat-label">有奖牌</div><div class="stat-value" id="statObtained">0</div></div>
+        <div class="stat-card red"><div class="stat-label">无奖牌</div><div class="stat-value" id="statMissing">0</div></div>
+        <div class="stat-card purple"><div class="stat-label">奖牌进度</div><div class="stat-value" id="statPct">0%</div></div>
       </div>
 
       <div class="panel">
@@ -73,14 +73,19 @@
             </div>
           </div>
           <div>
-            <div class="panel-title">收集进度一览</div>
+            <div class="panel-title">奖牌收集进度</div>
             <div class="ring-legend">
-              <div class="legend-row"><span class="legend-dot gold"></span>收录精灵总数 <span class="legend-num" id="lgTotal">0</span></div>
+              <div class="legend-row"><span class="legend-dot gold"></span>全图鉴精灵总数 <span class="legend-num" id="lgTotal">0</span></div>
               <div class="legend-row"><span class="legend-dot green"></span>已获得奖牌 <span class="legend-num" id="lgObtained">0</span></div>
               <div class="legend-row"><span class="legend-dot red"></span>尚未获得 <span class="legend-num" id="lgMissing">0</span></div>
             </div>
-            <div class="panel-title" style="margin-top:14px;">按期数统计（点击筛选）</div>
-            <div id="periodStats"></div>
+            <div class="panel-title" style="margin-top:14px;">玩法说明</div>
+            <p class="confirm-sub" style="line-height:1.9;">
+              ① 官方每期推出「命定花种」精灵（见面板 2 / 小工具）<br/>
+              ② 用<strong style="color:var(--gold)">任意精灵</strong>单人通关其中一只花种精灵<br/>
+              ③ 通关成功后，<strong style="color:var(--gold)">奖牌归你使用的那只精灵</strong>（每只通关一次即得奖牌）<br/>
+              ④ 在「奖牌与挑战记录」面板点「＋ 记录挑战」，系统会自动给该精灵标记奖牌
+            </p>
           </div>
         </div>
       </div>
@@ -90,20 +95,21 @@
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>
           </svg>
-          <input id="searchInput" type="text" placeholder="搜索精灵名称 / 期数 / 笔记…" autocomplete="off" />
+          <input id="searchInput" type="text" placeholder="搜索精灵名称 / 分类 / 编号…" autocomplete="off" />
         </div>
-        <select id="filterStatus" title="按状态筛选">
+        <select id="filterStatus" title="按奖牌状态筛选">
           <option value="all">全部状态</option>
-          <option value="obtained">已获得</option>
-          <option value="missing">未获得</option>
+          <option value="medal">有奖牌</option>
+          <option value="nomedal">无奖牌</option>
         </select>
-        <select id="filterPeriod" title="按期数筛选"></select>
+        <select id="filterType" title="按属性筛选"></select>
+        <select id="filterStage" title="按阶段筛选"></select>
         <select id="sortBy" title="排序">
-          <option value="default">按期数排序</option>
+          <option value="default">按图鉴编号</option>
           <option value="name">按名称排序</option>
-          <option value="date">按获得日期</option>
+          <option value="date">按奖牌日期</option>
         </select>
-        <button class="btn btn-primary" id="btnAdd">＋ 添加精灵</button>
+        <button class="btn btn-primary" id="btnAdd">＋ 补充精灵</button>
         <button class="btn btn-ghost" id="btnData">数据管理</button>
       </div>
 
@@ -111,30 +117,34 @@
       <div class="spirit-grid" id="spiritGrid"></div>
     </section>
 
-    <!-- ============ 面板 2：使用记录与统计 ============ -->
+    <!-- ============ 面板 2：奖牌与挑战记录 ============ -->
     <section class="tab-panel" id="panel-usage">
 
       <div class="stats-grid">
-        <div class="stat-card gold"><div class="stat-label">精灵库</div><div class="stat-value" id="uRoster">0</div></div>
-        <div class="stat-card green"><div class="stat-label">已使用</div><div class="stat-value" id="uUsed">0</div></div>
-        <div class="stat-card red"><div class="stat-label">未使用</div><div class="stat-value" id="uUnused">0</div></div>
-        <div class="stat-card purple"><div class="stat-label">使用率</div><div class="stat-value" id="uRate">0%</div></div>
+        <div class="stat-card gold"><div class="stat-label">精灵总数</div><div class="stat-value" id="uTotal">0</div></div>
+        <div class="stat-card green"><div class="stat-label">有奖牌</div><div class="stat-value" id="uMedal">0</div></div>
+        <div class="stat-card red"><div class="stat-label">无奖牌</div><div class="stat-value" id="uNoMedal">0</div></div>
+        <div class="stat-card purple"><div class="stat-label">奖牌率</div><div class="stat-value" id="uRate">0%</div></div>
       </div>
 
       <div class="panel">
-        <div class="panel-title">未使用精灵（精灵库中还没用来打过命定花种的）</div>
-        <div id="unusedList" class="chip-wrap"></div>
-        <p class="confirm-sub" style="margin-top:8px;">小提示：同一只精灵重复用于命定花种挑战不会重复获得奖牌奖励，优先用未使用过的精灵去打。</p>
+        <div class="panel-title">已获得奖牌的精灵</div>
+        <div id="medalList" class="chip-wrap"></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">尚未获得奖牌的精灵（前 150 只预览）</div>
+        <div id="noMedalList" class="chip-wrap"></div>
+        <p class="confirm-sub" style="margin-top:8px;">完整清单见「精灵图鉴」面板的「无奖牌」筛选；下次用没拿过奖牌的精灵去打命定花种。</p>
       </div>
 
       <div class="toolbar">
-        <button class="btn btn-primary" id="btnAddRecord">＋ 记录使用</button>
-        <button class="btn btn-ghost" id="btnRoster">管理精灵库</button>
+        <button class="btn btn-primary" id="btnAddRecord">＋ 记录挑战</button>
         <div class="grow"></div>
       </div>
 
       <div class="panel">
-        <div class="panel-title">使用记录（按期数分组）</div>
+        <div class="panel-title">挑战记录（按期数分组）</div>
         <div id="recordList"></div>
       </div>
     </section>
@@ -161,36 +171,31 @@
     </footer>
   </div>
 
-  <!-- ============ 奖牌精灵 添加 / 编辑弹窗 ============ -->
+  <!-- ============ 精灵 添加 / 编辑弹窗 ============ -->
   <div class="modal" id="formModal">
     <div class="modal-backdrop"></div>
     <div class="modal-body">
       <div class="modal-head">
-        <h3 id="formTitle">添加新精灵</h3>
+        <h3 id="formTitle">补充精灵</h3>
         <button class="modal-close" id="formClose" aria-label="关闭">✕</button>
       </div>
       <form id="spiritForm">
         <div class="form-grid">
           <div class="form-field full">
             <label for="fName">精灵名称 *</label>
-            <input id="fName" type="text" placeholder="如：星云旅者" required />
+            <input id="fName" type="text" placeholder="如：新赛季精灵" required />
           </div>
           <div class="form-field">
-            <label for="fPeriod">期数 / 活动</label>
-            <input id="fPeriod" type="text" placeholder="如：9月·第14期" />
+            <label for="fStage">阶段</label>
+            <input id="fStage" type="text" placeholder="如一阶 / 二阶 / 三阶" />
           </div>
           <div class="form-field">
-            <label for="fType">属性 / 族系</label>
-            <input id="fType" type="text" placeholder="选填" />
+            <label for="fTypes">属性</label>
+            <input id="fTypes" type="text" placeholder="如：水系 / 草系" />
           </div>
           <div class="form-field">
-            <label for="fDifficulty">难度</label>
-            <select id="fDifficulty">
-              <option value="">未标注</option>
-              <option value="低练度推荐">低练度推荐</option>
-              <option value="普通">普通</option>
-              <option value="较难">较难</option>
-            </select>
+            <label for="fSeason">赛季</label>
+            <input id="fSeason" type="text" placeholder="如：S4" />
           </div>
           <div class="form-field">
             <label class="form-check" style="padding-top:22px;">
@@ -198,12 +203,12 @@
             </label>
           </div>
           <div class="form-field full">
-            <label for="fDate">获得日期</label>
+            <label for="fDate">奖牌日期</label>
             <input id="fDate" type="date" />
           </div>
           <div class="form-field full">
-            <label for="fNotes">备注 / 攻略要点</label>
-            <textarea id="fNotes" placeholder="选填：使用的挑战精灵、技能搭配、奖励领取情况等"></textarea>
+            <label for="fNotes">备注</label>
+            <textarea id="fNotes" placeholder="选填：通关使用的精灵、技能搭配等"></textarea>
           </div>
         </div>
         <div class="form-actions">
@@ -214,23 +219,23 @@
     </div>
   </div>
 
-  <!-- ============ 使用记录 添加 / 编辑弹窗 ============ -->
+  <!-- ============ 挑战记录 添加 / 编辑弹窗 ============ -->
   <div class="modal" id="recordModal">
     <div class="modal-backdrop"></div>
     <div class="modal-body">
       <div class="modal-head">
-        <h3 id="formRecordTitle">记录使用精灵</h3>
+        <h3 id="formRecordTitle">记录挑战</h3>
         <button class="modal-close" id="recordClose" aria-label="关闭">✕</button>
       </div>
       <form id="recordForm">
         <div class="form-grid">
           <div class="form-field full">
-            <label for="rSpirit">使用的精灵 *（挑战时派出的那只）</label>
+            <label for="rSpirit">使用的精灵 *（奖牌将归它）</label>
             <input id="rSpirit" type="text" list="dlSpirit" placeholder="如：罗隐" required />
             <datalist id="dlSpirit"></datalist>
           </div>
           <div class="form-field full">
-            <label for="rTarget">挑战的命定花种精灵</label>
+            <label for="rTarget">通关的命定花种精灵</label>
             <input id="rTarget" type="text" list="dlTarget" placeholder="如：星云旅者" />
             <datalist id="dlTarget"></datalist>
           </div>
@@ -244,7 +249,7 @@
           </div>
           <div class="form-field full">
             <label class="form-check">
-              <input type="checkbox" id="rSuccess" checked /> 挑战成功（获得奖牌，自动同步到「奖牌收集」）
+              <input type="checkbox" id="rSuccess" checked /> 通关成功（自动给「使用的精灵」标记奖牌）
             </label>
           </div>
           <div class="form-field full">
@@ -257,23 +262,6 @@
           <button type="submit" class="btn btn-primary">保存</button>
         </div>
       </form>
-    </div>
-  </div>
-
-  <!-- ============ 精灵库管理弹窗 ============ -->
-  <div class="modal" id="rosterModal">
-    <div class="modal-backdrop" id="rosterBackdrop"></div>
-    <div class="modal-body">
-      <div class="modal-head">
-        <h3>管理精灵库</h3>
-        <button class="modal-close" id="rosterClose" aria-label="关闭">✕</button>
-      </div>
-      <p class="confirm-sub">精灵库用于统计「未使用」精灵；使用记录中出现过的精灵会自动计入。</p>
-      <div class="roster-add">
-        <input id="rNewName" type="text" placeholder="输入精灵名称，回车添加" />
-        <button class="btn btn-primary btn-sm" id="rAddBtn">添加</button>
-      </div>
-      <div id="rosterList" class="roster-list"></div>
     </div>
   </div>
 
