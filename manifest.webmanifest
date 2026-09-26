@@ -1,0 +1,12 @@
+{
+  "name": "命定勇者奖牌收集统计",
+  "short_name": "奖牌统计",
+  "description": "洛克王国：世界 命定花种「命定勇者」奖牌收集进度统计",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#120b33",
+  "theme_color": "#1c1142",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
